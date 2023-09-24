@@ -1,0 +1,33 @@
+name: Create and publish a Docker image
+
+on:
+  push:
+    branches: ["karsajobs-ui"]
+
+env:
+  BRANCH: ${{ github.ref }}
+
+jobs:
+  build-and-push-image:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ env.BRANCH }}
+
+      - name: Install and run hadolint
+        uses: hadolint/hadolint-action@v3.1.0
+        with:
+          args: Dockerfile
+
+      - name: Build and push Docker image
+        run: "sh ./build_push_image_karsajobs.sh"
+        env:
+          USERNAME: ${{ github.actor }}
+          PASSWORD: ${{ secrets.GITHUB_TOKEN }}
