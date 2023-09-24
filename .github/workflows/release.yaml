@@ -27,7 +27,7 @@ jobs:
           args: Dockerfile
 
       - name: Build and push Docker image
-        run: "sh ./build_push_image_karsajobs.sh"
+        run: "sh ./build_push_image_karsajobs_ui.sh"
         env:
           USERNAME: ${{ github.actor }}
           PASSWORD: ${{ secrets.GITHUB_TOKEN }}
