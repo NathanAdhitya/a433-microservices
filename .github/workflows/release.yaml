@@ -30,7 +30,7 @@ jobs:
         run: go test -v -short --count=1 $(go list ./...)
 
       - name: Build and push Docker image
-        run: "./build_push_image_karsajobs.sh"
+        run: "sh ./build_push_image_karsajobs.sh"
         env:
           USERNAME: ${{ github.actor }}
           PASSWORD: ${{ secrets.GITHUB_TOKEN }}
